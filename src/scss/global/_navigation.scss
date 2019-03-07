@@ -1,0 +1,69 @@
+.navigation-container {
+    display: flex;
+    padding: 0 15px;
+    height: 55px;
+    background: #333;
+    
+    .navigation {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        
+        a {
+            display: block;
+            color: white;
+            font-size: 0.9rem;
+            margin-right: 3rem;
+
+            &:hover {
+                color: #116fbf;
+            }
+
+            &.active {
+                border-bottom: 1px solid white;
+            }
+        }
+    }
+
+    .locale-switch-container {
+        flex: 0 0 3rem;
+        display: flex;
+        align-items: center;
+
+        i {
+            color: white;
+
+            &:hover {
+                cursor: pointer;
+            }
+            
+            & > div.p-menu {
+                width: 8rem;
+            }
+
+            & > span {
+                font-family: $defaultFont;
+                font-size: 14px;
+                padding: 0.3rem;
+    
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+
+    .flag {
+        width: 1.3rem;
+        height: 0.8rem;
+        display: inline-block;
+
+        &.flag-united-kingdom {
+            @include image('../assets/icons/United_Kingdom.svg');
+        }
+
+        &.flag-france {
+            @include image('../assets/icons/France.svg');
+        }
+    }
+}

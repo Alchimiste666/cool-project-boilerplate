@@ -1,0 +1,17 @@
+// Base imports
+@import "base/variables";
+@import "base/mixins";
+@import "base/fonts";
+@import "base/base";
+
+// Shared style imports
+@import "global/layout";
+@import "global/navigation";
+@import "global/pagination";
+@import "global/header";
+@import "global/forms";
+
+// View imports
+@import "views/home";
+@import "views/profile";
+@import "views/users"

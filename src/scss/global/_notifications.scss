@@ -1,0 +1,31 @@
+// User operation notifications
+.notification-pending {
+    color: #454545;
+    background-color: lightblue;
+    
+    i {
+        color: #454545;
+    }
+
+    span {
+        vertical-align: middle;
+    }
+}
+
+.notification-success {
+    color: #454545;
+    background-color: lightgreen;
+    
+    i {
+        color: #454545;
+    }
+}
+
+.notification-error {
+    color: #454545;
+    background-color: lightpink;
+    
+    i {
+        color: #454545;
+    }
+}

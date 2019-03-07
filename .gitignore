@@ -1,0 +1,9 @@
+.idea
+.code
+.history
+node_modules
+release
+build
+dist
+coverage
+*.DS_Store

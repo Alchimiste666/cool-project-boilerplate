@@ -1,0 +1,44 @@
+{
+  "LOCALE": {
+    "ENGLISH": "Anglais",
+    "FRENCH": "Français"
+  },
+  "GLOBAL": {
+    "GENERIC_ERROR_MESSAGE": "Oops ! Une erreur inattendue s'est produite",
+    "YES": "Oui",
+    "NO": "Non"
+  },
+  "NOTIFICATIONS": {
+    "OPERATION_IN_PROGRESS": "Opération en cours",
+    "OPERATION_SUCCESS": "Les modifications ont été appliquées avec succès",
+    "OPERATION_ERROR": "Oops! Il semble y avoir une erreur du système"
+  },
+  "NAVIGATION": {
+    "HOME": "index",
+    "ACCOUNT": "Compte",
+    "PROFILE": "Profil",
+    "USERS": "Utilisateurs"
+  },
+  "PAGINATION": {
+    "NO_RESULTS": "Aucun résultat trouvé",
+    "RESULT": "Résultat",
+    "RESULTS": "Résultats",
+    "ONE_SHOWN": "Montré",
+    "MANY_SHOWN": "Montrés",
+    "DISPLAYING": "Afficher"
+  },
+  "AUTHENTICATION": {
+    "EMAIL": "Courriel",
+    "USERNAME": "Nom d'utilisateur",
+    "PASSWORD": "Mot de passe",
+    "LOGIN": "Connexion",
+    "LOGOUT": "Deconnexion",
+    "FORGOT_PASSWORD": "J'ai oublié mon mot de passe",
+    "LOGIN_FAILURE": "Authentification invalide. Veuillez réessayer.",
+    "FORM_VALIDATION": {
+      "MISSING_USERNAME": "Le champ nom d'utilisateur est obligatoire",
+      "INVALID_USERNAME": "Courriel invalide",
+      "MISSING_PASSWORD": "Le champ mot de passe est obligatoire"
+    }
+  }
+}

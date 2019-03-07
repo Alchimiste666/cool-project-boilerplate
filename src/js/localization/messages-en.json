@@ -1,0 +1,44 @@
+{
+  "LOCALE": {
+    "ENGLISH": "English",
+    "FRENCH": "French"
+  },
+  "GLOBAL": {
+    "GENERIC_ERROR_MESSAGE": "Oops ! An unexpected error occured",
+    "YES": "Yes",
+    "NO": "No"
+  },
+  "NOTIFICATIONS": {
+    "OPERATION_IN_PROGRESS": "Operation in progress",
+    "OPERATION_SUCCESS": "The changes have been applied successfully",
+    "OPERATION_ERROR": "Oops! There seems to be a system error."
+  },
+  "NAVIGATION": {
+    "HOME": "Home",
+    "ACCOUNT": "Account",
+    "PROFILE": "Profile",
+    "USERS": "Users"
+  },
+  "PAGINATION": {
+    "NO_RESULTS": "No results were found",
+    "RESULT": "Result",
+    "RESULTS": "Results",
+    "ONE_SHOWN": "Shown",
+    "MANY_SHOWN": "Shown",
+    "DISPLAYING": "Displaying"
+  },
+  "AUTHENTICATION": {
+    "EMAIL": "Email",
+    "USERNAME": "Username",
+    "PASSWORD": "Password",
+    "LOGIN": "Log in",
+    "LOGOUT": "Log out",
+    "FORGOT_PASSWORD": "I forgot my password",
+    "LOGIN_FAILURE": "Invalid credentials. Please try again.",
+    "FORM_VALIDATION": {
+      "MISSING_USERNAME": "Username field is mandatory",
+      "INVALID_USERNAME": "Invalid email entry",
+      "MISSING_PASSWORD": "Password field is mandatory"
+    }
+  }
+}

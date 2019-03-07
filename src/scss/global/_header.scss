@@ -1,0 +1,50 @@
+#app-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 15px;
+    height: 65px;
+    width: 100%;
+    background: #fff;
+    align-items: center;
+    
+    #logo {
+        padding: 1.5rem;
+        display: inline-block;
+        height: 3.5rem;
+        width: 3.5rem;
+        @include image('../assets/icons/logo.png', 70%);
+    }
+
+    .authentication {
+
+        padding: 5px 10px;
+        border-radius: 5px;
+        -webkit-transition: all 0.2s;
+        transition: all 0.2s;
+    
+        &:hover {
+            background: #efefef;
+        }
+
+        .UserAvatar {
+            margin-right: 10px;
+        }
+      
+        .username {
+            display: flex;
+            align-items: center;
+      
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+}

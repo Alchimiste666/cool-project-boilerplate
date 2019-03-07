@@ -1,0 +1,120 @@
+import path from 'path';
+import gulp from 'gulp';
+import karma from 'karma';
+import yargs from 'yargs';
+import zip from 'gulp-zip';
+import bump from 'gulp-bump';
+import shell from 'gulp-shell';
+import babel from 'gulp-babel';
+import rimraf from 'rimraf-promise';
+import webpack from 'webpack';
+import webpackStream from 'webpack-stream';
+
+import projectPackage from './package.json';
+
+import babelConfig from './babel.config';
+import webpackReleaseConfig from './webpack.release-config.babel.js';
+
+const args = yargs
+    .option('releaseType', { type: 'string', default: 'minor' })
+    .argv;
+
+function runTests(executionMode = 'CI') {
+    return new Promise(resolve => {
+
+        let karmaConfig = {
+            configFile: path.resolve(__dirname, './karma.conf.js')
+        };
+
+        switch (executionMode) {
+
+            case 'DEV':
+                karmaConfig = { configFile: path.resolve(__dirname, './karma.dev-conf.js') };
+                break;
+
+            case 'TESTING':
+                karmaConfig = { ...karmaConfig, browsers: ['Chrome', 'Firefox'], singleRun: true };
+                break;
+
+            case 'CI':
+                karmaConfig = { ...karmaConfig, browsers: ['PhantomJS'], singleRun: true };
+                break;
+        }
+
+        const karmaCallback = exitCode => {
+
+            console.log('Karma test run complete!');
+
+            if (exitCode === 0) {
+                resolve();
+            } else {
+                console.error(`Karma tests failed with status code ${exitCode}`);
+                process.exit(exitCode);
+            }
+        };
+
+        new karma.Server(karmaConfig, karmaCallback).start();
+    });
+}
+
+function buildApplication() {
+
+    // File name and versioning
+    const artifactFilename = projectPackage.name + '-' + projectPackage.version + '.zip';
+
+    return new Promise(resolve =>
+        webpackStream(webpackReleaseConfig, webpack)
+            .pipe(gulp.dest('dist'))
+            .pipe(zip(artifactFilename))
+            .pipe(gulp.dest('release'))
+            .on('end', resolve)
+    );
+}
+
+gulp.task('clean', () => Promise.all([
+    rimraf('build'),
+    rimraf('dist'),
+    rimraf('release'),
+    rimraf('coverage')
+]));
+
+const coverageFolder = path.resolve(__dirname, 'coverage');
+
+gulp.task('test:watch', ['clean'], () =>
+    rimraf(coverageFolder)
+        .then(() => runTests('DEV'))
+);
+
+gulp.task('test', ['clean'], () =>
+    rimraf(coverageFolder)
+        .then(() => runTests('TESTING'))
+);
+
+gulp.task('test:ci', ['clean'], () =>
+    rimraf(coverageFolder)
+        .then(() => runTests('CI'))
+);
+
+gulp.task('watch', shell.task('webpack-dev-server --config ./webpack.development-config.babel.js'));
+
+gulp.task('build', ['clean'], () =>
+    gulp.src('src/**/*.js')
+        .pipe(babel(babelConfig))
+        .pipe(gulp.dest('build'))
+);
+
+gulp.task('release', ['clean'], () =>
+runTests()
+.then(buildApplication)
+);
+
+/*
+  Usage
+  gulp bump --release-type [RELEASE_TYPE]
+  Possible values [patch, minor, major]
+*/
+gulp.task('bump', () => {
+    gulp.src('./package.json')
+        .pipe(bump({ type: args.releaseType }))
+        .pipe(gulp.dest('./'));
+});
