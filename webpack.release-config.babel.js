@@ -20,7 +20,7 @@ export default {
   devtool: 'hidden-source-map',
   context: path.resolve('./src/'),
   entry: {
-    index: './js/index'
+    app: './js/app'
   },
   output: {
     path: distFolder,

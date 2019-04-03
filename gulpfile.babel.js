@@ -22,22 +22,23 @@ const args = yargs
 function runTests(executionMode = 'CI') {
     return new Promise(resolve => {
 
-        let karmaConfig = {
-            configFile: path.resolve(__dirname, './karma.conf.js')
-        };
+        const karmaDevConfig = path.resolve(__dirname, './karma.dev-conf.js')
+        const karmaCiConfig = path.resolve(__dirname, './karma.ci-conf.js');
+
+        let karmaConfig = null;
 
         switch (executionMode) {
 
             case 'DEV':
-                karmaConfig = { configFile: path.resolve(__dirname, './karma.dev-conf.js') };
+                karmaConfig = { configFile: karmaDevConfig };
                 break;
 
             case 'TESTING':
-                karmaConfig = { ...karmaConfig, browsers: ['Chrome', 'Firefox'], singleRun: true };
+                karmaConfig = { configFile: karmaCiConfig, browsers: ['Chrome', 'Firefox'], singleRun: true };
                 break;
 
             case 'CI':
-                karmaConfig = { ...karmaConfig, browsers: ['PhantomJS'], singleRun: true };
+                karmaConfig = { configFile: karmaCiConfig, browsers: ['PhantomJS'], singleRun: true };
                 break;
         }
 
@@ -104,8 +105,8 @@ gulp.task('build', ['clean'], () =>
 );
 
 gulp.task('release', ['clean'], () =>
-runTests()
-.then(buildApplication)
+    runTests()
+        .then(buildApplication)
 );
 
 /*

@@ -13,12 +13,12 @@ export default function (config) {
     // list of files / patterns to load in the browser
     files: [
       'node_modules/babel-polyfill/dist/polyfill.js',
-      'src/js/**/*.spec.js'
+      'src/js/unit-tests.js'
     ],
 
     // preprocess matching files before serving them to the browser
     preprocessors: {
-      'src/js/**/*.spec.js': ['webpack', 'sourcemap']
+      'src/js/**/*.js': ['webpack', 'sourcemap']
     },
 
     // webpack test config file
@@ -54,7 +54,7 @@ export default function (config) {
     // Overriding karma-mocha default timeout
     client: {
       mocha: {
-        timeout : 10000 // 10 seconds
+        timeout: 10000 // 10 seconds
       }
     }
   });

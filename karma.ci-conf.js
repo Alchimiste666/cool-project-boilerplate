@@ -13,19 +13,12 @@ export default function (config) {
     // list of files / patterns to load in the browser
     files: [
       'node_modules/babel-polyfill/dist/polyfill.js',
-      'src/js/utils/enzyme-test-helper.js',
-      'src/js/utils/intl-enzyme-test-helper.js',
-      'src/js/**/*.js'
-    ],
-    
-    exclude: [
-      'src/js/utils/*-test-helper.js',
-      'src/js/index.js'
+      'src/js/unit-tests.js'
     ],
 
     // preprocess matching files before serving them to the browser
     preprocessors: {
-      'src/js/**/*.js': ['webpack', 'sourcemap']
+      'src/js/**/*.js': ['webpack']
     },
 
     // webpack test config file

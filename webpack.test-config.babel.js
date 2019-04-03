@@ -52,7 +52,7 @@ export default function webpackTestConfig(options = { watch: false }) {
     mode: executionMode,
     watch: options.watch,
     target: 'web',
-    devtool: 'inline-source-map',
+    devtool: options.watch ? 'inline-source-map' : false,
     module: { rules },
     plugins: [
       new ProgressBarWebpackPlugin({
