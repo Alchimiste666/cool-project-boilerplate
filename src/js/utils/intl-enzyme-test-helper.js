@@ -9,7 +9,7 @@ import { IntlProvider, intlShape } from 'react-intl';
 import { mount, shallow } from 'enzyme';
 
 import { flattenMessages } from './localization.utils';
-import messages from '../localization/messages-en.json';
+import messages from '../localization/messages-en';
 
 // Create the IntlProvider to retrieve context for wrapping around.
 const intlProvider = new IntlProvider({ locale: 'en', messages: flattenMessages(messages) }, {});

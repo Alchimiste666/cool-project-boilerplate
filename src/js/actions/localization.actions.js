@@ -5,7 +5,7 @@ export const LOCALE_CHANGE = 'LOCALE_CHANGE';
 
 export function loadEnglish() {
   return dispatch => {
-    return import(/* webpackChunkName: "english" */ '../localization/messages-en.json')
+    return import(/* webpackChunkName: "english" */ '../localization/messages-en')
       .then(englishMessages => (dispatch({
         type: LOCALE_CHANGE,
         payload: {
@@ -18,7 +18,7 @@ export function loadEnglish() {
 
 export function loadFrench() {
   return dispatch => {
-    return import(/* webpackChunkName: "french" */ '../localization/messages-fr.json')
+    return import(/* webpackChunkName: "french" */ '../localization/messages-fr')
       .then(frenchMessages => (dispatch({
         type: LOCALE_CHANGE,
         payload: {

@@ -1,9 +1,9 @@
 import path from 'path';
 import chalk from 'chalk';
 import webpack from 'webpack';
-import babelConfig from './babel.config';
+import babelConfig from './.babelrc';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import CleanWebpackPlugin from 'clean-webpack-plugin';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import ProgressBarWebpackPlugin from 'progress-bar-webpack-plugin';
 import WriteFileWebpackPlugin from 'write-file-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
@@ -41,7 +41,7 @@ export default {
       },
       {
         test: /\.js$/i,
-        include: /src/,
+        exclude: /node_modules\/(?!query-string)/,
         loader: 'babel-loader',
         options: babelConfig
       },
@@ -174,8 +174,7 @@ export default {
     new CleanWebpackPlugin({ verbose: true }),
     new webpack.NamedModulesPlugin(),
     new webpack.DefinePlugin({
-      _TARGET_: JSON.stringify('DEV'),
-      API_URL: JSON.stringify(process.env.API_URL || 'https://my-api-url.com')
+      _TARGET_: JSON.stringify('DEV')
     }),
     new HtmlWebpackPlugin({
       template: './index.html'

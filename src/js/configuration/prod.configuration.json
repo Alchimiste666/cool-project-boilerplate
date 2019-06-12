@@ -1,0 +1,5 @@
+{
+    "DEV_MODE": false,
+    "RETRY_HTTP_REQUESTS": true,
+    "API_URL": "https://my-prod-api-url.com"
+}

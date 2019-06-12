@@ -1,12 +1,10 @@
 import chalk from 'chalk';
 import webpack from 'webpack';
-import babelConfig from './babel.config';
-import CleanWebpackPlugin from 'clean-webpack-plugin';
+import babelConfig from './.babelrc';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import ProgressBarWebpackPlugin from 'progress-bar-webpack-plugin';
 
 export default function webpackTestConfig(options = { watch: false }) {
-
-  const executionMode = options.watch ? 'development' : 'production';
 
   const rules = [
     {
@@ -43,13 +41,13 @@ export default function webpackTestConfig(options = { watch: false }) {
 
   rules.push({
     test: /\.js$/i,
-    include: /src/,
+    exclude: /node_modules\/(?!query-string)/,
     loader: 'babel-loader',
     options: babelConfig
   });
 
   return {
-    mode: executionMode,
+    mode: 'development',
     watch: options.watch,
     target: 'web',
     devtool: options.watch ? 'inline-source-map' : false,
@@ -61,9 +59,7 @@ export default function webpackTestConfig(options = { watch: false }) {
       }),
       new CleanWebpackPlugin({ verbose: true }),
       new webpack.DefinePlugin({
-        'process.env.NODE_ENV': JSON.stringify(executionMode),
-        _TARGET_: JSON.stringify('TEST'),
-        API_URL: JSON.stringify(process.env.API_URL || 'https://my-api-url.com')
+        _TARGET_: JSON.stringify('TEST')
       })
     ]
   };

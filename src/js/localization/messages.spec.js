@@ -1,12 +1,7 @@
 import { intersection, keys, difference, isEqual } from 'lodash-es';
 
-window.intersection = intersection;
-window.keys = keys;
-window.difference = difference;
-window.isEqual = isEqual;
-
-import englishMessages from './messages-en.json';
-import frddenchMessages from './messages-fr.json';
+import englishMessages from './messages-en';
+import frddenchMessages from './messages-fr';
 
 import { flattenMessages } from '../utils/localization.utils';
 

@@ -1,0 +1,5 @@
+{
+    "DEV_MODE": false,
+    "RETRY_HTTP_REQUESTS": false,
+    "API_URL": "https://my-test-api-url.com"
+}

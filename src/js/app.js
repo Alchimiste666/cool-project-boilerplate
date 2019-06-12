@@ -9,7 +9,8 @@ import 'font-awesome/css/font-awesome.css';
 // Application styles
 import '../scss/app.scss';
 
-import 'babel-polyfill';
+import "core-js/stable";
+import "regenerator-runtime/runtime";
 
 import React from 'react';
 import { render } from 'react-dom';

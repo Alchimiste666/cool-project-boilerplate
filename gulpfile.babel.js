@@ -12,7 +12,7 @@ import webpackStream from 'webpack-stream';
 
 import projectPackage from './package.json';
 
-import babelConfig from './babel.config';
+import babelConfig from './.babelrc';
 import webpackReleaseConfig from './webpack.release-config.babel.js';
 
 const args = yargs
@@ -29,16 +29,16 @@ function runTests(executionMode = 'CI') {
 
         switch (executionMode) {
 
-            case 'DEV':
-                karmaConfig = { configFile: karmaDevConfig };
-                break;
-
-            case 'TESTING':
+            case 'TEST':
                 karmaConfig = { configFile: karmaCiConfig, browsers: ['Chrome', 'Firefox'], singleRun: true };
                 break;
 
             case 'CI':
-                karmaConfig = { configFile: karmaCiConfig, browsers: ['PhantomJS'], singleRun: true };
+                karmaConfig = { configFile: karmaCiConfig, browsers: ['ChromeHeadless'], singleRun: true };
+                break;
+
+            case 'DEV':
+                karmaConfig = { configFile: karmaDevConfig };
                 break;
         }
 
@@ -58,15 +58,14 @@ function runTests(executionMode = 'CI') {
     });
 }
 
-function buildApplication() {
-
+function buildApplication(target) {
     // File name and versioning
-    const artifactFilename = projectPackage.name + '-' + projectPackage.version + '.zip';
+    const zipFilename = `${projectPackage.name}-${projectPackage.version}-${target}.zip`;
 
     return new Promise(resolve =>
-        webpackStream(webpackReleaseConfig, webpack)
-            .pipe(gulp.dest('dist'))
-            .pipe(zip(artifactFilename))
+        webpackStream(webpackReleaseConfig(target), webpack)
+            .pipe(gulp.dest('dist/' + target))
+            .pipe(zip(zipFilename))
             .pipe(gulp.dest('release'))
             .on('end', resolve)
     );
@@ -79,35 +78,26 @@ gulp.task('clean', () => Promise.all([
     rimraf('coverage')
 ]));
 
-const coverageFolder = path.resolve(__dirname, 'coverage');
+gulp.task('test', gulp.series('clean', () => runTests('TEST')));
 
-gulp.task('test:watch', ['clean'], () =>
-    rimraf(coverageFolder)
-        .then(() => runTests('DEV'))
-);
+gulp.task('test:ci', gulp.series('clean', () => runTests('CI')));
 
-gulp.task('test', ['clean'], () =>
-    rimraf(coverageFolder)
-        .then(() => runTests('TESTING'))
-);
-
-gulp.task('test:ci', ['clean'], () =>
-    rimraf(coverageFolder)
-        .then(() => runTests('CI'))
-);
+gulp.task('test:watch', gulp.series('clean', () => runTests('DEV')));
 
 gulp.task('watch', shell.task('webpack-dev-server --config ./webpack.development-config.babel.js'));
 
-gulp.task('build', ['clean'], () =>
+gulp.task('build', gulp.series('clean', () =>
     gulp.src('src/**/*.js')
         .pipe(babel(babelConfig))
         .pipe(gulp.dest('build'))
-);
+));
 
-gulp.task('release', ['clean'], () =>
+gulp.task('release', gulp.series('clean', () =>
     runTests()
-        .then(buildApplication)
-);
+        .then(() => buildApplication('DEV'))
+        .then(() => buildApplication('TEST'))
+        .then(() => buildApplication('PROD'))
+));
 
 /*
   Usage

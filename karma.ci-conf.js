@@ -1,7 +1,7 @@
 import path from 'path';
 import webpackTestConfig from "./webpack.test-config.babel";
 
-export default function (config) {
+export default (config) => {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
@@ -12,12 +12,14 @@ export default function (config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'node_modules/babel-polyfill/dist/polyfill.js',
+      'node_modules/core-js/stable/index.js',
+      'node_modules/regenerator-runtime/runtime.js',
       'src/js/unit-tests.js'
     ],
 
     // preprocess matching files before serving them to the browser
     preprocessors: {
+      'node_modules/core-js/stable/index.js': ['webpack'],
       'src/js/**/*.js': ['webpack']
     },
 

@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../http-client';
 import { stringify } from 'query-string';
 import { push } from 'react-router-redux';
 import { createAction } from 'redux-actions';
