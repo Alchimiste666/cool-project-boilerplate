@@ -193,7 +193,7 @@ export default {
   devServer: {
     historyApiFallback: true,
     contentBase: distFolder,
-    port: 7070,
+    port: 3000,
     open: true
   }
 };
