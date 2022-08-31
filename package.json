@@ -17,7 +17,7 @@
     "core-js": "3.19.3",
     "history": "4.10.1",
     "lodash-es": "4.17.21",
-    "moment-timezone": "0.5.34",
+    "moment-timezone": "0.5.35",
     "primeicons": "1.0.0",
     "primereact": "3.4.0",
     "promise-memoize": "1.2.1",
